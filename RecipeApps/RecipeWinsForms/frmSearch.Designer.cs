@@ -1,6 +1,6 @@
 ﻿namespace RecipeWinsForms
 {
-    partial class RecipeSearch
+    partial class frmSearch
     {
         /// <summary>
         /// Required designer variable.

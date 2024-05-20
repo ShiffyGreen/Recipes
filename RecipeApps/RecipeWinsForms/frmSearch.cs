@@ -6,9 +6,9 @@ using CPUWindowsFormsFramework;
 
 namespace RecipeWinsForms
 {
-    public partial class RecipeSearch : Form
+    public partial class frmSearch : Form
     {
-        public RecipeSearch()
+        public frmSearch()
         {
             InitializeComponent();
             btnSearch.Click += BtnSearch_Click;
