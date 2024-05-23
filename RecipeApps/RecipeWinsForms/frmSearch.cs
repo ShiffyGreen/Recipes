@@ -1,36 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using CPUFramework;
+using CPUWindowsFormsFramework;
 
 
 namespace RecipeWinsForms
 {
-    public partial class RecipeSearch : Form
+    public partial class frmSearch : Form
     {
-        public RecipeSearch()
+        public frmSearch()
         {
             InitializeComponent();
             btnSearch.Click += BtnSearch_Click;
             gRecipes.CellDoubleClick += gRecipes_CellDoubleClick;
-            FormatGrid();
+            WindowsFormUtility.FormatGridForSearchResults(gRecipes);
+            btnNew.Click += BtnNew_Click;
         }
 
+      
 
-        private void FormatGrid()
-        {
-            gRecipes.AllowUserToAddRows = false;
-            gRecipes.ReadOnly = true;
-            gRecipes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            gRecipes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        }
         private void SearchForRecipe(string recipe)
         {
             string sql = "select recipeid, recipename from recipe r where r.recipename like '%" + recipe + "%'";
@@ -41,7 +29,11 @@ namespace RecipeWinsForms
         }
         private void ShowRecipeForm(int rowindex)
         {
-            int id = (int)gRecipes.Rows[rowindex].Cells["recipeid"].Value;
+            int id = 0;
+            if (rowindex > -1)
+            {
+                id = (int)gRecipes.Rows[rowindex].Cells["recipeid"].Value;
+            }
             frmRecipe frm = new frmRecipe();
             frm.ShowForm(id);
         }
@@ -52,6 +44,10 @@ namespace RecipeWinsForms
         private void gRecipes_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
             ShowRecipeForm(e.RowIndex);
+        }
+        private void BtnNew_Click(object? sender, EventArgs e)
+        {
+            ShowRecipeForm(-1);
         }
 
     }
