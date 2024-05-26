@@ -6,3 +6,4 @@ select 473,(select CuisineId from cuisine where CuisineType = 'American'),(selec
 union select 275, (select CuisineId from cuisine where CuisineType = 'French'),(select UsersId from Users where LastName = 'Kaufman'),'Potato Kugel',null,'5-1-24',null
 
 
+select * from Recipe
