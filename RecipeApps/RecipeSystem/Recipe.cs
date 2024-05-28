@@ -22,7 +22,7 @@ namespace RecipeSystem
             string sql = "select * from recipe r join cuisine c on r.cuisineid = c.cuisineid join users u on r.usersid = u.usersid where recipeid = " + recipeid.ToString(); 
             return SQLUtility.GetDataTable(sql);
         }
-
+        //LB: An improvement would be to combine the two methods below. You can have one method called GetList and pass in a parameter which will specify the table name.
         public static DataTable GetCuisineList()
         {
             return SQLUtility.GetDataTable("Select CuisineId, CuisineType from cuisine");

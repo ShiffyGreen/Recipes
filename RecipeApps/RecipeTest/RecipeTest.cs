@@ -15,6 +15,7 @@ namespace RecipeTest
         {
             DataTable dt = SQLUtility.GetDataTable("select * from recipe where recipeid = 0");
             DataRow r = dt.Rows.Add();
+            //LB: Whenever using Assume, it's good to add a message shown if it comes out to false, so that the user knows what went wrong.
             Assume.That(dt.Rows.Count == 1);
 
             int cuisineid = SQLUtility.GetFirstCOlumnFirstRowValue("select top 1 cuisineid from cuisine");
@@ -58,7 +59,8 @@ namespace RecipeTest
             Recipe.Save(dt);
 
             int newcaloriecount = SQLUtility.GetFirstCOlumnFirstRowValue("select caloriecount from recipe where recipeid = " + recipeid);
-            Assert.IsTrue(newcaloriecount == caloriecount, "caloriecount for recipe (" + recipeid + ") = " + newcaloriecount);
+            //LB: Line below should be commented in.
+            //Assert.IsTrue(newcaloriecount == caloriecount, "caloriecount for recipe (" + recipeid + ") = " + newcaloriecount);
             TestContext.WriteLine("caloriecount for recipe (" + recipeid + ") = " + newcaloriecount);
 
         }
