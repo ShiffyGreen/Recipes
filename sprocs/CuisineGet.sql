@@ -22,5 +22,6 @@ exec CuisineGet @CuisineType = ''
 exec CuisineGet @CuisineType = 'a'
 
 declare @CuisineId int
+--LB: This select statements returns more than one item. Change this to return one item from the table. Same for all other sprocs
 select @CuisineId = c.CuisineId from Cuisine c
 exec CuisineGet @CuisineId = @CuisineId
