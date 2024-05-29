@@ -22,5 +22,5 @@ exec RecipeGet @RecipeName = ''
 exec RecipeGet @RecipeName = 'a'
 
 declare @RecipeId int
-select @RecipeId = r.RecipeId from Recipe r
+select top 1 @RecipeId = r.RecipeId from Recipe r
 exec RecipeGet @RecipeId = @RecipeId

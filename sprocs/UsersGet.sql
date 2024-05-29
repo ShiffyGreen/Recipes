@@ -22,5 +22,5 @@ exec UsersGet @LastName = ''
 exec UsersGet @LastName = 'a'
 
 declare @UsersId int
-select @UsersId = u.UsersId from Users u
+select top 1 @UsersId = u.UsersId from Users u
 exec UsersGet @UsersId = @UsersId
