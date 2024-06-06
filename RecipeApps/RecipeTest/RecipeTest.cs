@@ -91,9 +91,29 @@ namespace RecipeTest
             TestContext.WriteLine("existing recipe with id = " + recipeid);
             TestContext.WriteLine("Ensure that app loads recipe" + recipeid);
             DataTable dt = Recipe.Load(recipeid);
-            int loadedid = (int)dt.Rows[0]["recipeid"];
+            int loadedid = 0;
+            if (dt.Rows.Count > 0)
+            {
+                loadedid = (int)dt.Rows[0]["recipeid"];
+            }
             Assert.IsTrue(loadedid == recipeid, (int)dt.Rows[0]["recipeid"] + " <> " + recipeid);
             TestContext.WriteLine("Loaded recipe (" + loadedid + ")" + recipeid);
+        }
+
+        [Test]
+        public void SearchRecipe()
+        {
+            string criteria = "a";
+            int num = SQLUtility.GetFirstCOlumnFirstRowValue("select total = count(*) from recipe where recipename like '%" + criteria + "%'");
+            Assume.That(num > 0, "There no recipes that match the search for " + num);
+            TestContext.WriteLine(num + " recipe that match " + criteria);
+            TestContext.WriteLine("Ensure that recipe search returns " + num + " rows");
+
+            DataTable dt = Recipe.SearchRecipes(criteria);
+            int results = dt.Rows.Count;
+
+            Assert.IsTrue(results == num, "Results of recipe search does not match number of recipes, " + results + " <> " + num);
+            TestContext.WriteLine("Number of rows returned by recipe search is " + results);
         }
 
         [Test]
