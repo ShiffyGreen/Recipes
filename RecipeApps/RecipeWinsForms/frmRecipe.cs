@@ -55,7 +55,20 @@ namespace RecipeWinsForms
 
         private void Save()
         {
-            Recipe.Save(dtrecipe);
+            Application.UseWaitCursor = true;
+            try
+            {
+                Recipe.Save(dtrecipe);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Recipe App");
+            }
+            finally
+            {
+                Application.UseWaitCursor = false;
+            }
         }
         private void Delete()
         {
