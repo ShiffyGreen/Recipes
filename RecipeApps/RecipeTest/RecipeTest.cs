@@ -126,8 +126,8 @@ namespace RecipeTest
             int recipeid = GetExistingRecipeId();
 
             Assume.That(recipeid > 0, "No recipes in DB, can't test");
-            string recipename = SQLUtility.GetFirstCOlumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid <>  " + recipeid);
-            string currentname = SQLUtility.GetFirstCOlumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid = " + recipeid);
+            string recipename = GetFirstCOlumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid <>  " + recipeid);
+            string currentname = GetFirstCOlumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid = " + recipeid);
             Assume.That(recipename != "", "Cannot run test because there is no other recipe record in the table");
 
             TestContext.WriteLine("change recipeid " + recipeid + " from " + currentname + " to " + recipename + " which belongs to a dif recipe");
@@ -189,6 +189,13 @@ namespace RecipeTest
         private int GetExistingRecipeId()
         {
             return SQLUtility.GetFirstCOlumnFirstRowValue("select top 1 recipeid from recipe");
+        }
+
+        public static string GetFirstCOlumnFirstRowValueAsString(string sql)
+        {
+            DataTable dt = SQLUtility.GetDataTable(sql);
+            sql = dt.Rows[0][0].ToString();
+            return sql.ToString();
         }
     }
 }
