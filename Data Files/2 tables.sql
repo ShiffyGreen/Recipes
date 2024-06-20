@@ -46,9 +46,9 @@ create table dbo.Recipe(
         constraint f_recipe_Users foreign key references users(usersid),
     RecipeName varchar (50) not null
         constraint u_recipeName unique
-        constraint c_Recipie_RecipieName_cannot_be_blank check(recipename <> ''),
+        constraint c_Recipe_RecipeName_cannot_be_blank check(recipename <> ''),
     CalorieCount int not null
-        constraint ck_Recipie_CalorieCount_positive check (CalorieCount >= 0),
+        constraint ck_Recipe_CalorieCount_positive check (CalorieCount >= 0),
     DateDrafted datetime not null
        constraint ck_datedrafted_cannot_be_future check (DateDrafted <= getdate ()),
     DatePublished datetime
@@ -76,13 +76,13 @@ create table dbo.RecipeIngredient(
     IngredientId int not null
         constraint f_RecipeIngredient_Ingredient foreign key references Ingredient(IngredientId),
     UnitOfMeasureId int null
-        constraint f_RecepieIngredient_UnitOfMeasure foreign key references UnitOfMeasure(UnitOfMeasureId),
+        constraint f_RecipeIngredient_UnitOfMeasure foreign key references UnitOfMeasure(UnitOfMeasureId),
     IngredientSequence int not null
-        constraint  ck_RecepieIngredients_Sequence_greater_than_0 check (IngredientSequence > 0),
+        constraint  ck_RecipeIngredients_Sequence_greater_than_0 check (IngredientSequence > 0),
     Amount decimal(4,2) not null
         constraint ck_recipeingredient_amount_greater_than_zero check (Amount > 0),
     constraint u_recipeid_ingredientid_unique unique(RecipeId,IngredientId),
-    constraint u_recipieid_sequencenum_unique unique (RecipeId, IngredientSequence)
+    constraint u_recipeid_sequencenum_unique unique (RecipeId, IngredientSequence)
     )
 create table dbo.Directions(
     DirectionsId int not null identity primary key,
