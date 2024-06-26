@@ -61,13 +61,14 @@ union select 'Eliana', 'Kramer', 'ek'
 --recipe
 ;
 with x as (
- select RecipeName = 'Chocolate Chip Cookies', UserName= 'mf', cuisine = 'American', CalorieCount = 300, DateDrafted = '05-25-04', DatePublished = '01-25-24', DateArchived = null
+ select RecipeName = 'Chocolate Chip Cookies', UserName= 'mf', cuisine = 'American', CalorieCount = 300, DateDrafted = '05-25-04', DatePublished = '01-25-24', DateArchived = '06-17-24'
  union select 'Apple Yogurt Smoothie', 'as', 'French', 75, '06-06-2022', null,'11-7-23'
  union select 'Cheese Bread', 'mf', 'English', 150, '09-24-2012', null, null
  union select 'Butter Muffins', 'as', 'American', 310, '08-25-2014', '08-15-2020',null
  union select 'Pizza Bagels', 'lk','American', 339, '03-26-2015','05-27-2015',null 
  union select 'Hot Cocoa', 'lk', 'English',290, '08-31-2017','01-13-2018','07-03-2022'
  union select 'Muddy Buddies','ek','American', 530, '02-28-2023', null, null
+ union select 'Bagels', 'mf','American',400,'06-06-2024',null,null
 )
 insert recipe (RecipeName, UsersId, CuisineId, CalorieCount, DateDrafted, DatePublished, DateArchived)
 select x.RecipeName, u.UsersId, c.CuisineId, x.CalorieCount, x.DateDrafted ,x.DatePublished,x.datearchived 
@@ -126,6 +127,10 @@ with x as (
    union select 'Muddy Buddies','Peanut Butter',1,'cup',2
    union select 'Muddy Buddies','Chocolate Chips',1,'cup',3
    union select 'Muddy Buddies','confectionaries sugar',0.75,'cups', 4
+   union select 'Bagels', 'flour', 1, 'cup',1
+   union select 'Bagels', 'baking powder', 2, 'tsp',2
+   union select 'Bagels', 'eggs', 4, '',3
+   union select 'Bagels', 'butter', 1, 'stick',4
    )
 insert RecipeIngredient (RecipeId, IngredientId, UnitOfMeasureId, Amount,IngredientSequence)
 select r.RecipeId, i.IngredientId,u.UnitOfMeasureId, x.Measurement,x.ingredientSequence
@@ -170,6 +175,9 @@ with x as(
    union select 'Muddy Buddies',' Melt chocolate chips and peanut butter',1
    union select 'Muddy Buddies', 'Pour over the chex',2
    union select 'Muddy Buddies', 'When cooled, cover with confectionaries sugar.',3
+   union select 'Bagels',' mix together dough',1
+   union select 'Bagels', 'shape into bagels',2
+   union select 'Bagels', 'boil in water.',3
 )
 insert directions(recipeid,Instructions,DirectionsSequence)
 select r.recipeid, x.Instructions, x.DirectionsSequence
