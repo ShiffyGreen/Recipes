@@ -69,6 +69,8 @@ with x as (
  union select 'Hot Cocoa', 'lk', 'English',290, '08-31-2017','01-13-2018','07-03-2022'
  union select 'Muddy Buddies','ek','American', 530, '02-28-2023', null, null
  union select 'Bagels', 'mf','American',400,'06-06-2024',null,null
+ union select 'donuts', 'mf','American',400,'02-06-2024','03-06-2024','04-06-2024'
+ union select 'cake', 'mf','American',400,'02-06-2024',null,null
 )
 insert recipe (RecipeName, UsersId, CuisineId, CalorieCount, DateDrafted, DatePublished, DateArchived)
 select x.RecipeName, u.UsersId, c.CuisineId, x.CalorieCount, x.DateDrafted ,x.DatePublished,x.datearchived 

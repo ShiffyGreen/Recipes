@@ -8,12 +8,19 @@ left join Directions d
 on r.RecipeId = d.RecipeId
 where ri.RecipeIngredientId is null 
 and d.DirectionsId is null
+and (r.datearchived is null or datediff(day,r.datearchived,getdate()) >= 30)
 
-select * from Recipe r where r.RecipeId = @recipeid
+select 'Recipe',r.RecipeId,r.RecipeName from Recipe r where r.RecipeId = @recipeid
+union select 'Recipe Ingredient',ri.RecipeIngredientId,i.IngredientName from RecipeIngredient ri join Ingredient i on ri.ingredientId = i.IngredientId where ri.RecipeId = @recipeid
+union select 'directions', d.DirectionsId,d.Instructions from Directions d where d.RecipeId = @recipeid
 
-exec RecipeDelete @recipeid = @recipeid
+declare @return int, @message varchar(500)
 
-select * from Recipe r where r.RecipeId = @recipeid
+exec @return = RecipeDelete @recipeid = @recipeid, @message = @message output
 
+select @return, @message
 
-select * from Recipe where RecipeName = 'test'
+select 'Recipe',r.RecipeId,r.RecipeName from Recipe r where r.RecipeId = @recipeid
+union select 'Recipe Ingredient',ri.RecipeIngredientId,i.IngredientName from RecipeIngredient ri join Ingredient i on ri.ingredientId = i.IngredientId where ri.RecipeId = @recipeid
+union select 'directions', d.DirectionsId,d.Instructions from Directions d where d.RecipeId = @recipeid
+
