@@ -8,7 +8,7 @@ left join Directions d
 on r.RecipeId = d.RecipeId
 where ri.RecipeIngredientId is null 
 and d.DirectionsId is null
-and (r.datearchived is null or datediff(day,r.datearchived,getdate()) >= 30)
+and (r.CurrentStatus = 'draft' or datediff(day,r.datearchived,getdate()) >= 30)
 
 select 'Recipe',r.RecipeId,r.RecipeName from Recipe r where r.RecipeId = @recipeid
 union select 'Recipe Ingredient',ri.RecipeIngredientId,i.IngredientName from RecipeIngredient ri join Ingredient i on ri.ingredientId = i.IngredientId where ri.RecipeId = @recipeid
@@ -23,4 +23,5 @@ select @return, @message
 select 'Recipe',r.RecipeId,r.RecipeName from Recipe r where r.RecipeId = @recipeid
 union select 'Recipe Ingredient',ri.RecipeIngredientId,i.IngredientName from RecipeIngredient ri join Ingredient i on ri.ingredientId = i.IngredientId where ri.RecipeId = @recipeid
 union select 'directions', d.DirectionsId,d.Instructions from Directions d where d.RecipeId = @recipeid
+
 

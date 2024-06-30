@@ -83,7 +83,7 @@ namespace RecipeTest
         [Test]
         public void DeleteRecipe()
         {
-            DataTable dt = SQLUtility.GetDataTable("select top 1 r.recipeid, recipename, caloriecount from recipe r left join RecipeIngredient i on r.recipeid = i.recipeid where i.RecipeIngredientid is null");
+            DataTable dt = SQLUtility.GetDataTable("select top 1 r.recipeid, recipename, caloriecount from recipe r left join RecipeIngredient ri on r.RecipeId = ri.RecipeId left join Directions d on r.RecipeId = d.RecipeId where ri.RecipeIngredientid is null");
             int recipeid = 0;
             string recipedesc = "";
             if (dt.Rows.Count > 0)
@@ -104,6 +104,31 @@ namespace RecipeTest
         public void DeleteRecipeWithIngredients()
         {
             DataTable dt = SQLUtility.GetDataTable("select top 1 r.recipeid, recipename, caloriecount from recipe r join RecipeIngredient i on r.recipeid = i.recipeid");
+            int recipeId = 0;
+            string recipedesc = "";
+            if (dt.Rows.Count > 0)
+            {
+                recipeId = (int)dt.Rows[0]["recipeid"];
+                recipedesc = dt.Rows[0]["recipename"] + " " + dt.Rows[0]["caloriecount"];
+            }
+            Assume.That(recipeId > 0, "No recipe with ingredients in DB, can't test");
+            TestContext.WriteLine("existing recipe with ingredients, with id = " + recipeId + " " + recipedesc);
+            TestContext.WriteLine("ensure that app cannot delete " + recipeId);
+            Exception ex = Assert.Throws<Exception>(() => Recipe.Delete(dt));
+
+
+            TestContext.WriteLine("unable to delete recipe because of exeption");
+        }
+
+        [Test]
+        public void DeleteRecipeThatPublishedOrNotArchive30Days()
+        {
+            DataTable dt = SQLUtility.GetDataTable(@"
+                select top 1 r.recipeid, recipename, caloriecount 
+                from recipe r 
+                join RecipeIngredient i on r.recipeid = i.recipeid
+                where r.currentstatus = 'published'
+                or datediff(day,r.datearchived,getdate()) <= 30");
             int recipeId = 0;
             string recipedesc = "";
             if (dt.Rows.Count > 0)

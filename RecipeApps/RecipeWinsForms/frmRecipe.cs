@@ -17,6 +17,7 @@ namespace RecipeWinsForms
     public partial class frmRecipe : Form
     {
         DataTable dtrecipe;
+        BindingSource bindsource = new BindingSource();
         public frmRecipe()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace RecipeWinsForms
         public void ShowForm(int recipeid)
         {
             dtrecipe = Recipe.Load(recipeid);
+            bindsource.DataSource = dtrecipe;
             if (recipeid == 0)
             {
                 dtrecipe.Rows.Add();
@@ -43,13 +45,13 @@ namespace RecipeWinsForms
             txtUser.ValueMember = "UsersId";
             txtUser.DisplayMember = "lastname";
             txtUser.DataBindings.Add("SelectedValue", dtrecipe, "UsersId");
-            WindowsFormUtility.SetControlBinding(txtRecipeName, dtrecipe);
-            WindowsFormUtility.SetControlBinding(txtDateDrafted, dtrecipe);
-            WindowsFormUtility.SetControlBinding(txtDatePublished, dtrecipe);
-            WindowsFormUtility.SetControlBinding(txtDateArchived, dtrecipe);
-            WindowsFormUtility.SetControlBinding(txtCurrentStatus, dtrecipe);
-            WindowsFormUtility.SetControlBinding(txtCalorieCount, dtrecipe);
-            WindowsFormUtility.SetControlBinding(txtPictureName, dtrecipe);
+            WindowsFormUtility.SetControlBinding(txtRecipeName, bindsource);
+            WindowsFormUtility.SetControlBinding(txtDateDrafted, bindsource);
+            WindowsFormUtility.SetControlBinding(txtDatePublished, bindsource);
+            WindowsFormUtility.SetControlBinding(txtDateArchived, bindsource);
+            WindowsFormUtility.SetControlBinding(txtCurrentStatus, bindsource);
+            WindowsFormUtility.SetControlBinding(txtCalorieCount, bindsource);
+            WindowsFormUtility.SetControlBinding(txtPictureName, bindsource);
             this.Show();
         }
 
@@ -91,7 +93,7 @@ namespace RecipeWinsForms
             {
                 Application.UseWaitCursor = false;
             }
-            
+
         }
         private void BtnDelete_Click(object? sender, EventArgs e)
         {
