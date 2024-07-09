@@ -164,6 +164,7 @@
             txtDateArchived.Location = new Point(307, 361);
             txtDateArchived.Multiline = true;
             txtDateArchived.Name = "txtDateArchived";
+            txtDateArchived.ReadOnly = true;
             txtDateArchived.Size = new Size(299, 39);
             txtDateArchived.TabIndex = 10;
             // 
@@ -181,6 +182,7 @@
             txtDatePublished.Location = new Point(307, 316);
             txtDatePublished.Multiline = true;
             txtDatePublished.Name = "txtDatePublished";
+            txtDatePublished.ReadOnly = true;
             txtDatePublished.Size = new Size(299, 39);
             txtDatePublished.TabIndex = 9;
             // 
@@ -216,6 +218,7 @@
             txtDateDrafted.Location = new Point(307, 271);
             txtDateDrafted.Multiline = true;
             txtDateDrafted.Name = "txtDateDrafted";
+            txtDateDrafted.ReadOnly = true;
             txtDateDrafted.Size = new Size(299, 39);
             txtDateDrafted.TabIndex = 8;
             // 
