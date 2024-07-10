@@ -11,7 +11,6 @@ begin
 	join Cuisine c 
 	on c.CuisineId = r.CuisineId
 	where r.RecipeId = @RecipeId
-	group by r.RecipeName,c.CuisineType, r.RecipeId
 
 	return @value
 end
