@@ -5,13 +5,12 @@ create or alter proc dbo.RecipeUpdate(
 	@RecipeName varchar (50),
 	@CalorieCount int ,
 	@DatePublished datetime ,
-	@DateArchived datetime, 
-	@message varchar(500) = '' output
+	@DateArchived datetime
 
 )
 as
 begin
-	declare @return int = 0
+	select @recipeId = isnull(@RecipeId,0)
 
 	if @RecipeId = 0
 	begin

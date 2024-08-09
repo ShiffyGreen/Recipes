@@ -1,6 +1,11 @@
 use heartyhearthdb
 go
-create or alter procedure dbo.RecipeGet(@RecipeId int = 0, @RecipeName varchar(50) = '', @All bit = 0)
+create or alter procedure dbo.RecipeGet(
+	@RecipeId int = 0,
+	@RecipeName varchar(50) = '',
+	@All bit = 0,
+	@IncludeBlank bit = 0
+)
 as 
 begin
 	
@@ -11,6 +16,8 @@ begin
 	where r.RecipeId = @RecipeId
 	or @All = 1
 	or r.RecipeName like '%' + @RecipeName + '%'
+	union select 0,0,0,'',0,'','','','',''
+	where @IncludeBlank = 1
 	order by r.RecipeName
 end
 go

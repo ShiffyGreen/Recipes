@@ -32,17 +32,18 @@ namespace RecipeSystem
         {
             DataTable dt = new();
             SqlCommand cmd = SQLUtility.GetSqlCommand("CuisineGet");
-            cmd.Parameters["@All"].Value = 1;
+            SQLUtility.SetParamValue(cmd, "@All", 1);
             dt = SQLUtility.GetDataTable(cmd);
             return dt;
         }
 
-        public static DataTable GetUsersList()
+        public static DataTable GetUsersList(bool includeblank = false)
         {
 
             DataTable dt = new();
             SqlCommand cmd = SQLUtility.GetSqlCommand("UsersGet");
-            cmd.Parameters["@All"].Value = 1;
+            SQLUtility.SetParamValue(cmd, "@All", 1);
+            SQLUtility.SetParamValue(cmd, "@IncludeBlank", includeblank);
             dt = SQLUtility.GetDataTable(cmd);
             return dt;
 
@@ -66,5 +67,18 @@ namespace RecipeSystem
             SQLUtility.SetParamValue(cmd,"@RecipeId", id);
             SQLUtility.ExecuteSQL(cmd);
         }
+
+        public static DataTable GetRecipeSummary(bool includeblank = false)
+        {
+            SqlCommand cmd = SQLUtility.GetSqlCommand("RecipeListGet");
+            SQLUtility.SetParamValue(cmd, "@All", 1);
+            if (includeblank == true)
+            {
+                SQLUtility.SetParamValue(cmd, "@Includeblank", includeblank);
+            }
+            return SQLUtility.GetDataTable(cmd);
+        }
+
+       
     }
 }

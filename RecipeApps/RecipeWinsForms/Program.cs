@@ -14,7 +14,7 @@ namespace RecipeWinsForms
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             DBManager.SetConnectionString("Server=tcp:shiffygreen.database.windows.net,1433;Initial Catalog=HeartyHearthDB;Persist Security Info=False;User ID=shiffyadmin;Password=Bestfriend#1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            Application.Run(new frmSearch());
+            Application.Run(new frmMain());
         }
     }
 }
