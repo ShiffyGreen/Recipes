@@ -25,7 +25,7 @@ namespace RecipeWinsForms
 
         public void OpenForm(Type frmtype, int pkvalue = 0)
         {
-            bool b = WindowsFormUtility.IsFormOpen(frmtype);
+            bool b = WindowsFormUtility.IsFormOpen(frmtype, pkvalue);
 
             if (b == false)
             {
@@ -84,6 +84,12 @@ namespace RecipeWinsForms
                     frmCookbook f = new();
                     newfrm = f;
                     f.LoadFormCookbook(pkvalue);
+                }
+                else if (frmtype == typeof(frmChangeStatus))
+                {
+                    frmChangeStatus f = new();
+                    newfrm = f;
+                    f.LoadForm(pkvalue);
                 }
                 if (newfrm != null)
                 {

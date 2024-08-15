@@ -4,7 +4,7 @@ create or alter proc dbo.MealListGet(
 as 
 begin 
 
-	select m.MealName, u.UserName, NumCalories = sum (r.CalorieCount), NumCourses = count (distinct mc.CourseId), NumRecipes = count (distinct r.RecipeId)
+	select m.MealName, UserName = concat(u.firstname,' ',u.lastname), NumCalories = sum (r.CalorieCount), NumCourses = count (distinct mc.CourseId), NumRecipes = count (distinct r.RecipeId)
 	from meal m
 	join users u
 	on m.UsersId = u.UsersId
@@ -14,7 +14,7 @@ begin
 	on mcr.MealCourseId = mc.MealCourseId
 	join recipe r
 	on mcr.RecipeId = r.RecipeId
-	group by m.MealName, u.UserName
+	group by m.MealName,u.firstname,u.lastname
 	order by m.MealName
 
 	

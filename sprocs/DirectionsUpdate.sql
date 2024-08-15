@@ -1,5 +1,5 @@
 create or alter proc dbo.DirectionsUpdate(
-	@DirectionsId int = 0,
+	@DirectionsId int = 0 output,
 	@RecipeId int = 0,
 	@Instructions varchar(100) = '',
 	@DirectionsSequence int = 0,

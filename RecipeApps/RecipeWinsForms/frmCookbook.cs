@@ -28,9 +28,10 @@ namespace RecipeWinsForms
             this.Shown += FrmCookbook_Shown;
             btnRecipeSave.Click += BtnRecipeSave_Click;
             grecipe.CellContentClick += Grecipe_CellContentClick;
+            grecipe.DataError += Grecipe_DataError;
         }
 
-     
+      
 
         private void FrmCookbook_Shown(object? sender, EventArgs e)
         {
@@ -76,6 +77,10 @@ namespace RecipeWinsForms
             Application.UseWaitCursor = true;
             try
             {
+                if (dtcookbook.Rows[0]["DateCreated"] == DBNull.Value)
+                {
+                    dtcookbook.Rows[0]["DateCreated"] = DateTime.Now.ToString("dd MMM yyyy");
+                }
                 Cookbook.Save(dtcookbook);
                 b = true;
                 bindsource.ResetBindings(false);
@@ -181,6 +186,10 @@ namespace RecipeWinsForms
         private void Grecipe_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             DeleteCookbookRecipe(e.RowIndex);
+        }
+        private void Grecipe_DataError(object? sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Please enter the correct data type", Application.ProductName);
         }
     }
 }

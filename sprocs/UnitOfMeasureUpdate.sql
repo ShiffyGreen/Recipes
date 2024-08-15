@@ -1,5 +1,5 @@
 create or alter proc dbo.unitOfMeasureUpdate(
-	@UnitOfMeasureId int = 0,
+	@UnitOfMeasureId int = 0 output,
 	@MeasureName varchar(50) = '',
 	@Message varchar(500) = ''  output
 )

@@ -1,5 +1,5 @@
 create or alter proc dbo.RecipeIngredientUpdate(
-	@RecipeIngredientId int = 0,
+	@RecipeIngredientId int = 0 output,
 	@RecipeId int = 0,
 	@IngredientId int = 0,
 	@UnitofMeasureId int = 0,

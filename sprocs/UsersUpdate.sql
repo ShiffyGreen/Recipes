@@ -1,5 +1,5 @@
 create or alter proc dbo.UsersUpdate(
-	@UsersId int = 0,
+	@UsersId int = 0 output,
 	@FirstName varchar(25) = '',
 	@LastName varchar(25) = '',
 	@UserName varchar(25) = '',

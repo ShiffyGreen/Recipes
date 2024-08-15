@@ -5,7 +5,9 @@ create or alter proc dbo.RecipeUpdate(
 	@RecipeName varchar (50),
 	@CalorieCount int ,
 	@DatePublished datetime ,
-	@DateArchived datetime
+	@DateArchived datetime,
+	@CurrentStatus varchar(9) = '' output
+
 
 )
 as

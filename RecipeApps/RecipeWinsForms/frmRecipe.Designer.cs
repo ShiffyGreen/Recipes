@@ -58,6 +58,7 @@
             tblSteps = new TableLayoutPanel();
             btnSaveSteps = new Button();
             gSteps = new DataGridView();
+            btnChangeStatus = new Button();
             tblmain.SuspendLayout();
             tblStatusDates.SuspendLayout();
             tbChildRecords.SuspendLayout();
@@ -91,6 +92,7 @@
             tblmain.Controls.Add(txtCurrentStatus, 1, 5);
             tblmain.Controls.Add(tblStatusDates, 1, 6);
             tblmain.Controls.Add(tbChildRecords, 0, 10);
+            tblmain.Controls.Add(btnChangeStatus, 3, 0);
             tblmain.Dock = DockStyle.Fill;
             tblmain.Location = new Point(0, 0);
             tblmain.Name = "tblmain";
@@ -422,6 +424,16 @@
             gSteps.Size = new Size(688, 208);
             gSteps.TabIndex = 1;
             // 
+            // btnChangeStatus
+            // 
+            btnChangeStatus.AutoSize = true;
+            btnChangeStatus.Location = new Point(481, 3);
+            btnChangeStatus.Name = "btnChangeStatus";
+            btnChangeStatus.Size = new Size(151, 34);
+            btnChangeStatus.TabIndex = 16;
+            btnChangeStatus.Text = "Change Status";
+            btnChangeStatus.UseVisualStyleBackColor = true;
+            // 
             // frmRecipe
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -476,5 +488,6 @@
         private TableLayoutPanel tblSteps;
         private Button btnSaveSteps;
         private DataGridView gSteps;
+        private Button btnChangeStatus;
     }
 }

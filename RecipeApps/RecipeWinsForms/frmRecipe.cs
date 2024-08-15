@@ -25,9 +25,13 @@ namespace RecipeWinsForms
             this.Shown += FrmRecipe_Shown;
             gIngredients.CellContentClick += GIngredients_CellContentClick;
             gSteps.CellContentClick += GSteps_CellContentClick;
+            btnChangeStatus.Click += BtnChangeStatus_Click;
+            gIngredients.DataError += GIngredients_DataError;
+            gSteps.DataError += GSteps_DataError;
+            
         }
 
-
+       
 
         private void FrmRecipe_Shown(object? sender, EventArgs e)
         {
@@ -91,6 +95,14 @@ namespace RecipeWinsForms
             Application.UseWaitCursor = true;
             try
             {
+                if (dtrecipe.Rows[0]["DateDrafted"] == DBNull.Value)
+                {
+                    dtrecipe.Rows[0]["DateDrafted"] = DateTime.Now.ToString("dd MMM yyyy");
+                }
+                if (dtrecipe.Rows[0]["CurrentStatus"] == DBNull.Value)
+                {
+                    dtrecipe.Rows[0]["CurrentStatus"] = "draft"; 
+                }
                 Recipe.Save(dtrecipe);
                 b = true;
                 bindsource.ResetBindings(false);
@@ -161,13 +173,13 @@ namespace RecipeWinsForms
         {
             try
             {
-                    int id = WindowsFormUtility.GetIdFromGrid(gSteps, rowIndex, "DirectionsId");
+                int id = WindowsFormUtility.GetIdFromGrid(gSteps, rowIndex, "DirectionsId");
                 if (id > 0)
                 {
-                
-                        RecipeSteps.Delete(id);
-                        LoadRecipeSteps();
-               
+
+                    RecipeSteps.Delete(id);
+                    LoadRecipeSteps();
+
                 }
                 else if (id < gIngredients.Rows.Count)
                 {
@@ -184,17 +196,17 @@ namespace RecipeWinsForms
             try
             {
                 int id = WindowsFormUtility.GetIdFromGrid(gIngredients, rowIndex, "RecipeIngredientId");
-            if (id > 0)
-            {
-               
+                if (id > 0)
+                {
+
                     RecipeIngredients.Delete(id);
                     LoadRecipeIngredients();
-               
-            }
-            else if (id < gIngredients.Rows.Count)
-            {
-                gIngredients.Rows.RemoveAt(rowIndex);
-            }
+
+                }
+                else if (id < gIngredients.Rows.Count)
+                {
+                    gIngredients.Rows.RemoveAt(rowIndex);
+                }
             }
             catch (Exception ex)
             {
@@ -246,6 +258,20 @@ namespace RecipeWinsForms
         {
             DeleteRecipeSteps(e.RowIndex);
         }
+        private void BtnChangeStatus_Click(object? sender, EventArgs e)
+        {
+            ((frmMain)this.MdiParent).OpenForm(typeof(frmChangeStatus), recipeid);
+        }
+        private void GSteps_DataError(object? sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Please enter the correct data type", Application.ProductName);
+        }
+
+        private void GIngredients_DataError(object? sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Please enter the correct data type", Application.ProductName);
+        }
+
 
         private void FrmRecipe_FormClosing(object? sender, FormClosingEventArgs e)
         {

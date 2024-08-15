@@ -14,7 +14,7 @@ begin
 	or @All = 1
 	union select 0,'',0
 	where @IncludeBlank = 1
-	order by c.coursename
+	order by c.coursesequence
 	
 	return @return 
 end

@@ -1,5 +1,5 @@
 create or alter proc dbo.CourseUpdate(
-	@CourseId int = 0,
+	@CourseId int = 0 output,
 	@CourseName varchar (50) = '',
 	@CourseSequence int = 0,
 	@Message varchar(500) = ''  output

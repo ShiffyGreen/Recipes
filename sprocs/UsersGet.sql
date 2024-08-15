@@ -10,12 +10,12 @@ begin
 	declare @return int = 0
 	select @LastName = nullif(@LastName,'')
 
-	select u.UsersId,u.FirstName,u.LastName,u.UserName
+	select u.UsersId,u.FirstName,u.LastName,u.UserName,FullName = concat(u.FirstName,' ',u.LastName)
 	from Users u
 	where u.UsersId = @UsersId
 	or @All = 1
 	or u.LastName like '%' + @LastName + '%'
-	union select 0,'','',''
+	union select 0,'','','',''
 	where @IncludeBlank = 1
 	order by u.LastName, u.FirstName
 

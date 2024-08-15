@@ -28,23 +28,32 @@ namespace RecipeWinsForms
         {
             DataTable dt = Recipe.GetUsersList(true);
             txtUsers.DataSource = dt;
-            txtUsers.DisplayMember = "userName";
+            txtUsers.DisplayMember = "FullName";
             txtUsers.ValueMember = "UsersId";
 
         }
         private void CreateCookbook()
         {
             int usersid = WindowsFormUtility.GetIdFromComboBox(txtUsers);
-
+            int newcookbookid = 0;
             Cursor = Cursors.WaitCursor;
             try
             {
+                SqlCommand cmd = SQLUtility.GetSqlCommand("AutoCreateCookbook");
+                SQLUtility.SetParamValue(cmd, "@Usersid", usersid);
+                SQLUtility.SetParamValue(cmd, "@NewCookbookId", DBNull.Value);
+                SQLUtility.ExecuteSQL(cmd);
 
-                Cookbook.AutoCreateCookbook(usersid);
-                if (this.MdiParent != null && this.MdiParent is frmMain)
+                newcookbookid = (int)cmd.Parameters["@NewCookbookId"].Value;
+
+                if (newcookbookid > 0)
                 {
-                    ((frmMain)this.MdiParent).OpenForm(typeof(frmCookbook),usersid);
-                    this.Close();
+
+                    if (this.MdiParent != null && this.MdiParent is frmMain)
+                    {
+                        ((frmMain)this.MdiParent).OpenForm(typeof(frmCookbook), newcookbookid);
+                        this.Close();
+                    }
                 }
             }
             catch (Exception ex)

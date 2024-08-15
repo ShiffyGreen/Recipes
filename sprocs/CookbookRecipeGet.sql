@@ -9,11 +9,10 @@ as
 begin
 	select CookbookRecipeId,CookbookId,recipeid,sequencenumber
 	from cookbookrecipe cr
-	--join recipe r 
-	--on r.recipeId = cr.recipeid
 	where cr.CookbookRecipeId = @cookbookrecipeid
 	or @All = 1
 	or cr.CookbookId = @CookbookId
+	order by cr.SequenceNumber
 end
 go
 select * from cookbookrecipe

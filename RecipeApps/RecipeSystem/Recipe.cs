@@ -79,6 +79,15 @@ namespace RecipeSystem
             return SQLUtility.GetDataTable(cmd);
         }
 
+        public static void ChangeStatus(int recipeid, DateTime datedrafted,DateTime? datepublished = null,DateTime? datearchived = null)
+        {
+            SqlCommand cmd = SQLUtility.GetSqlCommand("ChangeStatus");
+            SQLUtility.SetParamValue(cmd, "@RecipeId", recipeid);
+            SQLUtility.SetParamValue(cmd, "@DateDrafted", datedrafted);
+            SQLUtility.SetParamValue(cmd, "DatePublished", datepublished);
+            SQLUtility.SetParamValue(cmd, "@DateArchived", datearchived);
+            SQLUtility.ExecuteSQL(cmd);
+        }
        
     }
 }
