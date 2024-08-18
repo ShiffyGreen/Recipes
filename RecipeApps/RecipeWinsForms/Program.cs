@@ -1,4 +1,5 @@
 using RecipeSystem;
+using System.Configuration;
 
 namespace RecipeWinsForms
 {
@@ -13,8 +14,11 @@ namespace RecipeWinsForms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            DBManager.SetConnectionString("Server=tcp:shiffygreen.database.windows.net,1433;Initial Catalog=HeartyHearthDB;Persist Security Info=False;User ID=shiffyadmin;Password=Bestfriend#1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            Application.Run(new frmMain());
+            frmMain f = new frmMain();
+#if DEBUG
+            f.Text = f.Text + " - DEV";
+#endif
+            Application.Run(f);
         }
     }
 }
