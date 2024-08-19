@@ -162,6 +162,7 @@
             // txtDateDrafted
             // 
             txtDateDrafted.Anchor = AnchorStyles.Left;
+            txtDateDrafted.Enabled = false;
             txtDateDrafted.Location = new Point(161, 11);
             txtDateDrafted.Name = "txtDateDrafted";
             txtDateDrafted.Size = new Size(146, 27);
@@ -170,6 +171,7 @@
             // txtDatePublished
             // 
             txtDatePublished.Anchor = AnchorStyles.Left;
+            txtDatePublished.Enabled = false;
             txtDatePublished.Location = new Point(319, 11);
             txtDatePublished.Name = "txtDatePublished";
             txtDatePublished.Size = new Size(144, 27);
@@ -178,6 +180,7 @@
             // txtDateArchived
             // 
             txtDateArchived.Anchor = AnchorStyles.Left;
+            txtDateArchived.Enabled = false;
             txtDateArchived.Location = new Point(475, 11);
             txtDateArchived.Name = "txtDateArchived";
             txtDateArchived.Size = new Size(149, 27);
@@ -276,7 +279,7 @@
             ClientSize = new Size(800, 580);
             Controls.Add(tblMain);
             Name = "frmChangeStatus";
-            Text = "frmChangeStatus";
+            Text = "Change Status";
             tblstatus.ResumeLayout(false);
             tblstatus.PerformLayout();
             tblDates.ResumeLayout(false);

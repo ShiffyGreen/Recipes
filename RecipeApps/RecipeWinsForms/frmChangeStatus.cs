@@ -21,9 +21,10 @@ namespace RecipeWinsForms
         {
             InitializeComponent();
             btnDraft.Click += BtnDraft_Click;
+            btnPublished.Click += BtnPublished_Click;
+            btnArchived.Click += BtnArchived_Click;
         }
 
-   
 
         public void LoadForm(int recipeidval)
         {
@@ -40,7 +41,23 @@ namespace RecipeWinsForms
         }
         private void BtnDraft_Click(object? sender, EventArgs e)
         {
-            Recipe.ChangeStatus(recipeid, DateTime.Parse(txtDateDrafted.Text),null,null);
+            Recipe.ChangeStatus(recipeid, "drafted");
+            dtrecipe = Recipe.Load(recipeid);
+            bindsource.DataSource = dtrecipe;
         }
+        private void BtnArchived_Click(object? sender, EventArgs e)
+        {
+            Recipe.ChangeStatus(recipeid, "archived");
+            dtrecipe = Recipe.Load(recipeid);
+            bindsource.DataSource = dtrecipe;
+        }
+
+        private void BtnPublished_Click(object? sender, EventArgs e)
+        {
+            Recipe.ChangeStatus(recipeid, "published");
+            dtrecipe = Recipe.Load(recipeid);
+            bindsource.DataSource = dtrecipe;
+        }
+
     }
 }
