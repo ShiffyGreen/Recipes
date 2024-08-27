@@ -6,9 +6,9 @@ as
 begin
 	select cb.CookbookId, cb.CookbookName, UserName = concat(u.firstname,' ',u.lastname), NumofRecipes = count(cbr.RecipeId)
 	from Cookbook cb 
-	join Users u 
+	left join Users u 
 	on cb.UsersId = u.UsersId
-	join CookbookRecipe cbr 
+	left join CookbookRecipe cbr 
 	on cb.CookbookId = cbr.CookbookId
 	group by cb.cookbookid,cb.CookbookName, u.firstname,u.lastname
 	order by cb.CookbookName
