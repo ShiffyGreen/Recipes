@@ -1,7 +1,7 @@
 create or alter proc dbo.RecipeListGet(
 	@RecipeId int = 0,
 	@All int = 0,
-	@IncludeBlank bit = 0,
+	@IncludeBlank bit = 0
 )
 as 
 begin 
