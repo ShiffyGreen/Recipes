@@ -4,11 +4,39 @@ namespace RecipeTest
 {
     public class Tests
     {
+        string liveconnstring = ConfigurationManager.ConnectionStrings["liveconn"].ConnectionString;
+        //string liveconnstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
+        //string testliveconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
         [SetUp]
         public void Setup()
         {
-            DBManager.SetConnectionString("Server=tcp:shiffygreen.database.windows.net,1433;Initial Catalog=HeartyHearthDB;Persist Security Info=False;User ID=shiffyadmin;Password=Bestfriend#1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            DBManager.SetConnectionString(liveconnstring, true);
         }
+        private DataTable GetDataTable(string sql)
+        {
+            DataTable dt = new();
+            DBManager.SetConnectionString(liveconnstring, false);
+            dt = SQLUtility.GetDataTable(sql);
+            DBManager.SetConnectionString(liveconnstring, false);
+            return dt;
+        }
+
+        private int GetFirstCOlumnFirstRowValue(string sql)
+        {
+            int n = 0;
+            DBManager.SetConnectionString(liveconnstring, false);
+            n = SQLUtility.GetFirstCOlumnFirstRowValue(sql);
+            DBManager.SetConnectionString(liveconnstring, false);
+            return n;
+        }
+        public string GetFirstCOlumnFirstRowValueAsString(string sql)
+        {
+            DataTable dt = new();
+            dt = GetDataTable(sql);
+            sql = dt.Rows[0][0].ToString();
+            return sql.ToString();
+        }
+
 
         [Test]
         public void InsertNewRecipe()
