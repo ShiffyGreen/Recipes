@@ -5,28 +5,29 @@ namespace RecipeTest
 {
     public class Tests
     {
-        string connstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
-        string testconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
+        string liveconnstring = ConfigurationManager.ConnectionStrings["liveconn"].ConnectionString;
+        //string liveconnstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
+        //string testliveconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
         [SetUp]
         public void Setup()
         {
-            DBManager.SetConnectionString(connstring, true);
+            DBManager.SetConnectionString(liveconnstring, true);
         }
         private DataTable GetDataTable(string sql)
         {
             DataTable dt = new();
-            DBManager.SetConnectionString(testconnstring, false);
+            DBManager.SetConnectionString(liveconnstring, false);
             dt = SQLUtility.GetDataTable(sql);
-            DBManager.SetConnectionString(connstring, false);
+            DBManager.SetConnectionString(liveconnstring, false);
             return dt;
         }
 
         private int GetFirstCOlumnFirstRowValue(string sql)
         {
             int n = 0;
-            DBManager.SetConnectionString(testconnstring, false);
+            DBManager.SetConnectionString(liveconnstring, false);
             n = SQLUtility.GetFirstCOlumnFirstRowValue(sql);
-            DBManager.SetConnectionString(connstring, false);
+            DBManager.SetConnectionString(liveconnstring, false);
             return n;
         }
         public string GetFirstCOlumnFirstRowValueAsString(string sql)
