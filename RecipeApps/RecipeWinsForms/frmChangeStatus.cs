@@ -41,22 +41,76 @@ namespace RecipeWinsForms
         }
         private void BtnDraft_Click(object? sender, EventArgs e)
         {
-            Recipe.ChangeStatus(recipeid, "drafted");
-            dtrecipe = Recipe.Load(recipeid);
-            bindsource.DataSource = dtrecipe;
+            var response = MessageBox.Show("Are you sure you want to change the recipes status to draft?", Application.ProductName, MessageBoxButtons.YesNo);
+            if (response == DialogResult.No)
+            {
+                return;
+            }
+            Application.UseWaitCursor = true;
+            try
+            {
+                Recipe.ChangeStatus(recipeid, "drafted");
+                dtrecipe = Recipe.Load(recipeid);
+                bindsource.DataSource = dtrecipe;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+            }
+            finally
+            {
+                Application.UseWaitCursor = false;
+            }
+            
         }
         private void BtnArchived_Click(object? sender, EventArgs e)
         {
-            Recipe.ChangeStatus(recipeid, "archived");
-            dtrecipe = Recipe.Load(recipeid);
-            bindsource.DataSource = dtrecipe;
+            var response = MessageBox.Show("Are you sure you want to change the recipes status to archived?", Application.ProductName, MessageBoxButtons.YesNo);
+            if (response == DialogResult.No)
+            {
+                return;
+            }
+            Application.UseWaitCursor = true;
+            try
+            {
+                Recipe.ChangeStatus(recipeid, "archived");
+                dtrecipe = Recipe.Load(recipeid);
+                bindsource.DataSource = dtrecipe;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+            }
+            finally
+            {
+                Application.UseWaitCursor = false;
+            }
+          
         }
 
         private void BtnPublished_Click(object? sender, EventArgs e)
         {
-            Recipe.ChangeStatus(recipeid, "published");
-            dtrecipe = Recipe.Load(recipeid);
-            bindsource.DataSource = dtrecipe;
+            var response = MessageBox.Show("Are you sure you want to change the recipes status to published?", Application.ProductName, MessageBoxButtons.YesNo);
+            if (response == DialogResult.No)
+            {
+                return;
+            }
+            Application.UseWaitCursor = true;
+            try
+            {
+                Recipe.ChangeStatus(recipeid, "published");
+                dtrecipe = Recipe.Load(recipeid);
+                bindsource.DataSource = dtrecipe;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+            }
+            finally
+            {
+                Application.UseWaitCursor = false;
+            }
+        
         }
 
     }

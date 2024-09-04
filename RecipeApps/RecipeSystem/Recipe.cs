@@ -70,7 +70,7 @@ namespace RecipeSystem
 
         public static DataTable GetRecipeSummary(bool includeblank = false)
         {
-            SqlCommand cmd = SQLUtility.GetSqlCommand("RecipeListGet");
+            SqlCommand cmd = SQLUtility.GetSqlCommand("RecipeGet");
             SQLUtility.SetParamValue(cmd, "@All", 1);
             if (includeblank == true)
             {

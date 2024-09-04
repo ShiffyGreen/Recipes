@@ -8,7 +8,7 @@ begin
 	from Cookbook cb 
 	join Users u 
 	on cb.UsersId = u.UsersId
-	join CookbookRecipe cbr 
+	Left join CookbookRecipe cbr 
 	on cb.CookbookId = cbr.CookbookId
 	group by cb.cookbookid,cb.CookbookName, u.firstname,u.lastname
 	order by cb.CookbookName

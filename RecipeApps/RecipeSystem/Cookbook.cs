@@ -10,7 +10,8 @@ namespace RecipeSystem
     {
         public static DataTable GetCookbookList()
         {
-            SqlCommand cmd = SQLUtility.GetSqlCommand("CookbookListGet");
+            SqlCommand cmd = SQLUtility.GetSqlCommand("CookbookGet");
+            SQLUtility.SetParamValue(cmd, "@All", 1);
             return SQLUtility.GetDataTable(cmd);
         }
 
