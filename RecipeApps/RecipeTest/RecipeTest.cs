@@ -1,12 +1,13 @@
 using System.Data;
+using System.Configuration;
 
 namespace RecipeTest
 {
     public class Tests
     {
         string liveconnstring = ConfigurationManager.ConnectionStrings["liveconn"].ConnectionString;
-        //string liveconnstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
-        //string testliveconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
+        string devconnstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
+        string testliveconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
         [SetUp]
         public void Setup()
         {
@@ -179,8 +180,8 @@ namespace RecipeTest
             int recipeid = GetExistingRecipeId();
 
             Assume.That(recipeid > 0, "No recipes in DB, can't test");
-            string recipename = GetFirstCOlumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid <>  " + recipeid);
-            string currentname = GetFirstCOlumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid = " + recipeid);
+            string recipename = GetFirstColumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid <>  " + recipeid);
+            string currentname = GetFirstColumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid = " + recipeid);
             Assume.That(recipename != "", "Cannot run test because there is no other recipe record in the table");
 
             TestContext.WriteLine("change recipeid " + recipeid + " from " + currentname + " to " + recipename + " which belongs to a dif recipe");
@@ -244,7 +245,7 @@ namespace RecipeTest
             return SQLUtility.GetFirstCOlumnFirstRowValue("select top 1 recipeid from recipe");
         }
 
-        public static string GetFirstCOlumnFirstRowValueAsString(string sql)
+        private static string GetFirstColumnFirstRowValueAsString(string sql)
         {
             DataTable dt = SQLUtility.GetDataTable(sql);
             sql = dt.Rows[0][0].ToString();
