@@ -6,8 +6,8 @@ namespace RecipeTest
     public class Tests
     {
         string liveconnstring = ConfigurationManager.ConnectionStrings["liveconn"].ConnectionString;
-        string devconnstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
-        string testliveconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
+        //string devconnstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
+        //string testliveconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
         [SetUp]
         public void Setup()
         {
