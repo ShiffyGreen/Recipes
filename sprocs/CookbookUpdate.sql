@@ -32,4 +32,6 @@ begin
 end 
 go
 
-select * from Cookbook
+exec dbo.cookbookupdate @cookbookid = 0, @UsersId = 127, @cookbookname = 'abc', @price = 12.32, @activeornot = 1, @datecreated = '1-1-24'
+
+select * from cookbook order by cookbookid desc 
