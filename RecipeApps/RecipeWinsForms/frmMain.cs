@@ -21,7 +21,18 @@ namespace RecipeWinsForms
             this.Shown += FrmMain_Shown;
         }
 
-      
+        private void FrmMain_Shown(object? sender, EventArgs e)
+        {
+            frmLogin f = new() { StartPosition = FormStartPosition.CenterParent };
+            bool b = f.ShowLogin();
+            if (b == false)
+            {
+                this.Close();
+                Application.Exit();
+                return;
+            }
+            OpenForm(typeof(frmDashboard));
+        }
 
         public void OpenForm(Type frmtype, int pkvalue = 0)
         {
@@ -158,9 +169,6 @@ namespace RecipeWinsForms
         {
             OpenForm(typeof(frmDashboard));
         }
-        private void FrmMain_Shown(object? sender, EventArgs e)
-        {
-            OpenForm(typeof(frmDashboard));
-        }
+
     }
 }
