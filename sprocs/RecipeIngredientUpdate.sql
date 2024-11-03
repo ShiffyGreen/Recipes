@@ -32,6 +32,7 @@ begin
 end
 go 
 
+exec recipeingredientupdate
 
 select * 
 from Recipe r 
