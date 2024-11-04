@@ -62,9 +62,10 @@ namespace RecipeTest
             r["usersid"] = usersid;
             r["recipename"] = recipename;
             r["caloriecount"] = maxcalories;
-            r["DateDrafted"] = "2024-1-1";
-            r["DatePublished"] = "2024-3-3";
-            Recipe.Save(dt);
+            r["DateDrafted"] = "2023-1-1";
+            //r["DatePublished"] = DateTime.Now;
+            bizRecipe rec = new();
+            rec.Save(dt);
 
             int newid = SQLUtility.GetFirstCOlumnFirstRowValue("select * from recipe where caloriecount = " + maxcalories);
 
@@ -123,7 +124,8 @@ namespace RecipeTest
             Assume.That(recipeid > 0, "No recipes in DB, can't test");
             TestContext.WriteLine("existing recipe with id = " + recipeid + " " + recipedesc);
             TestContext.WriteLine("ensure that app can delete " + recipeid);
-            Recipe.Delete(dt);
+            bizRecipe rec = new();
+            rec.Delete(dt);
             DataTable dtafterdelete = SQLUtility.GetDataTable("select * from recipe where recipeid = " + recipeid);
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "record with recipeid " + recipeid + "exists in DB");
             TestContext.WriteLine("Record with recipeid " + recipeid + " does not exist in DB");
@@ -200,14 +202,15 @@ namespace RecipeTest
             Assume.That(recipeid > 0, "No recipes in DB, can't test");
             TestContext.WriteLine("existing recipe with id = " + recipeid);
             TestContext.WriteLine("Ensure that app loads recipe" + recipeid);
-            DataTable dt = Recipe.Load(recipeid);
+            bizRecipe rec = new();
+            DataTable dt = rec.Load(recipeid);
             int loadedid = 0;
             if (dt.Rows.Count > 0)
             {
                 loadedid = (int)dt.Rows[0]["recipeid"];
             }
             Assert.IsTrue(loadedid == recipeid, (int)dt.Rows[0]["recipeid"] + " <> " + recipeid);
-            TestContext.WriteLine("Loaded recipe (" + loadedid + ")" + recipeid);
+            TestContext.WriteLine("Loaded recipe (" + loadedid + ") " + recipeid);
         }
 
         [Test]
