@@ -8,9 +8,125 @@ namespace RecipeSystem
 {
     public class bizRecipe : bizObject
     {
-        public bizRecipe() : base("Recipe")
+        public bizRecipe() 
         {
 
         }
+
+        private int _recipeid;
+        private int _cuisineid;
+        private int _usersid;
+        private string _recipename;
+        private int _caloriecount;
+        private DateTime _datedrafted;
+        private DateTime? _datepublished;
+        private DateTime? _datearchived;
+
+
+        public int RecipeId
+        {
+            get { return _recipeid; }
+            set
+            {
+                if (_recipeid != value)
+                {
+                    _recipeid = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+
+        public int CuisineId
+        {
+            get { return _cuisineid; }
+            set
+            {
+                if (_cuisineid != value)
+                {
+                    _cuisineid = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+
+        public int UsersId
+        {
+            get { return _usersid; }
+            set
+            {
+                if (_usersid != value)
+                {
+                    _usersid = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+
+        public string RecipeName
+        {
+            get { return _recipename; }
+            set
+            {
+                if (_recipename != value)
+                {
+                    _recipename = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+        public int CalorieCount
+        {
+            get { return _caloriecount; }
+            set
+            {
+                if (_caloriecount != value)
+                {
+                    _caloriecount = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+
+        public DateTime DateDrafted
+        {
+            get { return _datedrafted; }
+            set
+            {
+                if (_datedrafted != value)
+                {
+                    _datedrafted = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+
+        public DateTime? DatePublished
+        {
+            get { return _datepublished; }
+            set
+            {
+                if (_datepublished != value)
+                {
+                    _datepublished = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+
+        public DateTime? DateArchived
+        {
+            get { return _datearchived; }
+            set
+            {
+                if (_datearchived != value)
+                {
+                    _datearchived = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+
+
+
     }
 }
