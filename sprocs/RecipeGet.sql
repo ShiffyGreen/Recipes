@@ -11,12 +11,12 @@ begin
 	
 	select @RecipeName = nullif(@RecipeName,'')
 
-	select r.RecipeId,r.CuisineId,r.UsersId,r.RecipeName,r.CalorieCount,r.DateDrafted,r.DatePublished,r.DateArchived,r.CurrentStatus,r.PictureName
+	select r.RecipeId,r.CuisineId,r.UsersId,r.RecipeName,r.CalorieCount,r.DateDrafted,r.DatePublished,r.DateArchived,r.CurrentStatus,r.PictureName,r.vegan
 	from Recipe r
 	where r.RecipeId = @RecipeId
 	or @All = 1
 	or r.RecipeName like '%' + @RecipeName + '%'
-	union select 0,0,0,'',0,'','','','',''
+	union select 0,0,0,'',0,'','','','','',0
 	where @IncludeBlank = 1
 	order by r.RecipeName
 end
@@ -24,7 +24,7 @@ go
 
 exec RecipeGet
 
-exec RecipeGet @All = 1
+exec RecipeGet @All = 1, @includeblank = 1
 
 exec RecipeGet @RecipeName = ''
 
