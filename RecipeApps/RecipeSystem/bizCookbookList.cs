@@ -17,7 +17,7 @@ namespace RecipeSystem
         private string _cookbookname;
         private string _username;
         private int _numofrecipes;
-        private string _skilllevel;
+        private string _skilldesc;
 
         public int CookbookId
         {
@@ -67,14 +67,14 @@ namespace RecipeSystem
                 }
             }
         }
-        public string SkillLevel
+        public string SkillDesc
         {
-            get { return _skilllevel; }
+            get { return _skilldesc; }
             set
             {
-                if (_skilllevel != value)
+                if (_skilldesc != value)
                 {
-                    _skilllevel = value;
+                    _skilldesc = value;
                     InvokePropertyChanged();
                 }
             }

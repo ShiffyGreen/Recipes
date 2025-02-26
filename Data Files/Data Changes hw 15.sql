@@ -1,6 +1,16 @@
 --alter table recipe add Vegan bit not null default ''
 --alter table meal add description  varchar(500) not null default ''
---alter table cookbook add skilllevel varchar(15) not null default ''
+--alter table cookbook add skilllevel int not null default 0
+--alter table cookbook add SkillDesc as 
+--	case when skilllevel = 1 then '1 = Beginner' 
+--	when skilllevel = 2 then '2 = Intermediate'
+--	when skilllevel = 3 then '3 = Advanced'
+--	else '' end 
+
+--alter table cookbook drop CONSTRAINT DF__Cookbook__skilll__16EF297E
+--alter table cookbook drop column skilllevel
+
+select * from Cookbook
 
 --;
 --with x as(
@@ -30,16 +40,16 @@
 --from Meal m
 --join x on m.MealName = x.mealname
 
-; with x as (
-	select 'A Taste Of Heaven' as cookbookname, 'advanced' as skilllevel
-	union select 'Cooking Hacks' as cookbookname, 'beginner' as skilllevel
-	union select 'Sweet Eats' as cookbookname, 'intermediate' as skilllevel
-	union select 'Treats for two' as cookbookname, 'intermediate' as skilllevel
-)
-update c 
-set c.skilllevel = x.skilllevel
-from Cookbook c
-join x on c.CookbookName = x.cookbookname
+--; with x as (
+--	select 'A Taste Of Heaven' as cookbookname, 3 as skilllevel
+--	union select 'Cooking Hacks' as cookbookname, 1 as skilllevel
+--	union select 'Sweet Eats' as cookbookname, 2 as skilllevel
+--	union select 'Treats for two' as cookbookname, 2 as skilllevel
+--)
+--update c 
+--set c.skilllevel = x.skilllevel
+--from Cookbook c
+--join x on c.CookbookName = x.cookbookname
 
 
-select * from Cookbook
+--select * from Cookbook
