@@ -8,8 +8,9 @@ create or alter proc dbo.CookbookRecipeGet(
 )
 as 
 begin
-	select CookbookRecipeId,CookbookId,cr.recipeid,r.RecipeName,sequencenumber,r.caloriecount,r.vegan,r.datepublished
+	select CookbookRecipeId,cr.CookbookId,cb.cookbookname,cr.recipeid,r.RecipeName,sequencenumber,r.caloriecount,r.vegan,r.datepublished
 	from cookbookrecipe cr
+	join cookbook cb on cr.cookbookid = cb.cookbookid
 	join Recipe r on r.RecipeId = cr.RecipeId
 	where cr.CookbookRecipeId = @cookbookrecipeid
 	or @All = 1

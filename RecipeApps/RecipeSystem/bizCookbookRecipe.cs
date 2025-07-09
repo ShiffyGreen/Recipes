@@ -21,11 +21,19 @@ namespace RecipeSystem
         private int _caloriecount;
         private DateTime? _datepublished;
         private Boolean _vegan;
+        private string _cookbookname;
 
         public List<bizCookbookRecipe> GetListByCookbookId(int cookbookid)
         {
             SqlCommand cmd = SQLUtility.GetSqlCommand(this.GetSprocName);
             SQLUtility.SetParamValue(cmd, "CookbookId", cookbookid);
+            DataTable dt = SQLUtility.GetDataTable(cmd);
+            return this.GetListDataTable(dt);
+        }
+        public List<bizCookbookRecipe> GetListByCookbookName(string cookbookname)
+        {
+            SqlCommand cmd = SQLUtility.GetSqlCommand(this.GetSprocName);
+            SQLUtility.SetParamValue(cmd, "CookbookName", cookbookname);
             DataTable dt = SQLUtility.GetDataTable(cmd);
             return this.GetListDataTable(dt);
         }
@@ -129,6 +137,19 @@ namespace RecipeSystem
                 if (_vegan != value)
                 {
                     _vegan = value;
+                    InvokePropertyChanged();
+                }
+            }
+        }
+
+        public string CookbookName
+        {
+            get { return _cookbookname; }
+            set
+            {
+                if (_cookbookname != value)
+                {
+                    _cookbookname = value;
                     InvokePropertyChanged();
                 }
             }
