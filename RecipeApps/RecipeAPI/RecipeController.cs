@@ -21,5 +21,40 @@ namespace RecipeAPI
             return r;
         }
 
+        [HttpGet("cuisine/{cuisineid:int:min(0)}")]
+        public List<bizRecipe> GetbyCuisineId(int cuisineid)
+        {
+            return new bizRecipe().CuisId(cuisineid);
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromForm]bizRecipe recipe)
+        {
+            try
+            {
+                recipe.Save();
+                return Ok(new { message = "recipe saved", recipeid = recipe.RecipeId });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                bizRecipe r = new();
+                r.Delete(id);
+                return Ok(new { message = "party deleted" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+
     }
 }

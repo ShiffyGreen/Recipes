@@ -31,6 +31,13 @@ namespace RecipeSystem
             return this.GetListDataTable(dt);
         }
 
+        public List<bizRecipe> CuisId(int id)
+        {
+            SqlCommand cmd = SQLUtility.GetSqlCommand(this.GetSprocName);
+            SQLUtility.SetParamValue(cmd, "CuisineId", id);
+            DataTable dt = SQLUtility.GetDataTable(cmd);
+            return this.GetListDataTable(dt);
+        }
 
         public int RecipeId
         {
